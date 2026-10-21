@@ -7,33 +7,38 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--logo:#003913;--brand:#3B6B35;--lighter:#6DAF47;--bg:#F5F5F7;--ink:#1D1D1F;--muted:#6E6E73;--ok:#30D158;--warn:#FF9F0A}
+:root{--logo:#003913;--brand:#3B6B35;--lighter:#6DAF47;--bg:#F5F5F7;--ink:#1D1D1F;--muted:#6E6E73}
 *{box-sizing:border-box}
 body{margin:0;background:#E9E9EC;font-family:Inter,system-ui,sans-serif;color:var(--ink)}
 header{max-width:1400px;margin:0 auto;padding:32px 24px 8px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
 header h1{margin:0;font-size:26px;font-weight:700}
-header p{margin:6px 0 0;color:var(--muted);font-size:14px;max-width:640px;line-height:1.5}
+header p{margin:6px 0 0;color:var(--muted);font-size:14px;max-width:660px;line-height:1.5}
 .ctrls{display:flex;gap:8px;flex-wrap:wrap}
 .btn{font:inherit;font-size:14px;font-weight:600;border:1px solid #C2D6C0;background:#fff;color:var(--brand);padding:10px 16px;border-radius:12px;cursor:pointer;min-height:44px}
 .btn:hover{background:#F0F7EF}
 .btn[aria-pressed="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
-.grid{max-width:1400px;margin:0 auto;padding:16px 24px 48px;display:flex;flex-wrap:wrap;gap:28px;justify-content:center}
-.opt{display:flex;flex-direction:column;gap:12px;width:calc(390px * .72 + 20px)}
+.grid{max-width:1400px;margin:0 auto;padding:16px 24px 48px;display:flex;flex-wrap:wrap;gap:32px;justify-content:center}
+.opt{display:flex;flex-direction:column;gap:12px;width:301px}
 .opt h2{margin:0;font-size:16px;font-weight:700}
 .opt h2 span{color:var(--brand)}
 .opt p{margin:0;font-size:13px;line-height:1.5;color:var(--muted)}
 .opt .btn{align-self:flex-start;padding:8px 14px;min-height:40px;font-size:13px}
-.frame{width:calc(390px * .72 + 20px);height:calc(844px * .72 + 20px);border-radius:40px;background:#111;padding:10px;box-shadow:0 20px 40px rgba(0,0,0,.18)}
+.frame{width:301px;height:628px;border-radius:40px;background:#111;padding:10px;box-shadow:0 20px 40px rgba(0,0,0,.18)}
 .scaler{width:390px;height:844px;transform:scale(.72);transform-origin:0 0;border-radius:42px;overflow:hidden}
-.stage{position:relative;width:390px;height:844px;overflow:hidden;background:var(--logo);color:#fff}
+.stage{position:relative;width:390px;height:844px;overflow:hidden;background:var(--logo);color:#fff;isolation:isolate}
 .abs{position:absolute}
-svg{overflow:visible}
-.tag{position:absolute;left:0;right:0;text-align:center;font-size:19px;font-weight:500;letter-spacing:-.2px}
-.sub{position:absolute;left:0;right:0;text-align:center;font-size:10px;font-weight:500;letter-spacing:1.8px;color:rgba(255,255,255,.62)}
-.words{display:flex;align-items:center;gap:8px}
-.words img{height:39px;display:block}
-.words span{font-size:45px;font-weight:300;line-height:1;color:rgba(255,255,255,.85);letter-spacing:-.5px}
+svg{overflow:visible;display:block}
 .fb{transform-box:fill-box;transform-origin:center}
+.green{background:radial-gradient(120% 70% at 50% 43%,#0C5A25 0%,#003913 52%,#00240B 100%)}
+
+.lockup{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.words{display:flex;align-items:center;gap:7px}
+.words img{height:34px;display:block}
+.words span{font-size:39px;font-weight:300;line-height:1;color:rgba(255,255,255,.85);letter-spacing:-.5px}
+.sub{font-size:10px;font-weight:500;letter-spacing:1.8px;color:rgba(255,255,255,.62)}
+
+.shine{position:absolute;inset:0;overflow:hidden;-webkit-mask-size:100% 100%;mask-size:100% 100%}
+.shine i{position:absolute;top:-20%;bottom:-20%;left:0;width:40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);transform:translateX(-150%) skewX(-20deg)}
 
 /* Tela "Agora" (o que aparece depois da abertura) */
 .app{position:absolute;inset:0;background:var(--bg);color:var(--ink);padding:60px 20px 0;display:flex;flex-direction:column;gap:14px}
@@ -46,251 +51,95 @@ svg{overflow:visible}
 .app .row{display:flex;gap:8px;align-items:center}
 .app .dot{width:8px;height:8px;border-radius:50%;background:#D1D1D6}
 
-/* ============ 1 · ENCAIXE (7s) ============ */
-.o1 .big{left:115px;top:300px;width:160px;height:160px;animation:o1big 7s infinite}
-@keyframes o1big{0%,36%{transform:translate(0,0) scale(1);animation-timing-function:cubic-bezier(.6,0,.2,1)}46%,100%{transform:translate(-112px,42px) scale(.35)}}
-.o1 .mk{animation:o1sq 7s infinite;transform-origin:center}
-@keyframes o1sq{0%,18%{transform:scale(1)}20%{transform:scale(1.1,.9)}23%{transform:scale(.97,1.04)}26%,100%{transform:scale(1)}}
-.o1 .top{animation:o1top 7s infinite}
-@keyframes o1top{0%{transform:translateY(-2000px);animation-timing-function:cubic-bezier(.55,0,.85,.4)}11%{transform:translateY(30px)}14%{transform:translateY(-10px)}16%,100%{transform:translateY(0)}}
-.o1 .bot{animation:o1bot 7s infinite}
-@keyframes o1bot{0%,4%{transform:translateY(2000px);animation-timing-function:cubic-bezier(.55,0,.85,.4)}15%{transform:translateY(-30px)}18%{transform:translateY(10px)}20%,100%{transform:translateY(0)}}
-.o1 .ring{left:115px;top:300px;width:160px;height:160px;border-radius:50%;border:2px solid var(--lighter);opacity:0;animation:o1ring 7s infinite}
-@keyframes o1ring{0%,19%{opacity:0;transform:scale(.4)}20%{opacity:.9;transform:scale(.5)}34%,100%{opacity:0;transform:scale(2.6)}}
-.o1 .tag{top:510px;opacity:0;animation:o1tag 7s infinite}
-@keyframes o1tag{0%,21%{opacity:0;transform:translateY(12px)}26%,33%{opacity:1;transform:none}38%,100%{opacity:0;transform:translateY(-8px)}}
-.o1 .lock{left:128px;top:394px;height:56px;display:flex;align-items:center;animation:o1wipe 7s infinite}
-@keyframes o1wipe{0%,44%{clip-path:inset(0 100% 0 0);opacity:0}45%{opacity:1}55%,100%{clip-path:inset(0 0 0 0);opacity:1}}
-.o1 .sub{top:476px;opacity:0;animation:o1sub 7s infinite}
-@keyframes o1sub{0%,54%{opacity:0;letter-spacing:4px}62%,100%{opacity:1;letter-spacing:1.8px}}
-.o1 .app{clip-path:circle(0px at 83px 422px);animation:o1rev 7s infinite}
-@keyframes o1rev{0%,70%{clip-path:circle(0px at 83px 422px);animation-timing-function:cubic-bezier(.7,0,.3,1)}82%,100%{clip-path:circle(1000px at 83px 422px)}}
-
-/* ============ 2 · SINAL AO VIVO (7s) ============ */
-.o2 .scene{position:absolute;inset:0;animation:o2scene 7s infinite}
-@keyframes o2scene{0%{opacity:0;transform:translateY(16px)}5%,37%{opacity:1;transform:none}44%,100%{opacity:0;transform:scale(.92)}}
-.o2 .mach{left:85px;top:300px;width:220px;height:170px}
-.o2 .spk{animation:spin 1.4s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.o2 .arc{opacity:0;animation:o2arc 1.5s infinite}
-.o2 .arc.a2{animation-delay:.25s}.o2 .arc.a3{animation-delay:.5s}
-@keyframes o2arc{0%{opacity:0}20%{opacity:1}60%,100%{opacity:0}}
-.o2 .pkt{left:192px;top:290px;width:7px;height:7px;border-radius:50%;background:var(--lighter);animation:o2pkt 1.6s infinite ease-in}
-.o2 .pkt.p2{animation-delay:.55s}.o2 .pkt.p3{animation-delay:1.1s}
-@keyframes o2pkt{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(-300px);opacity:0}}
-.o2 .chip{left:0;right:0;top:494px;display:flex;justify-content:center}
-.o2 .chip div{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500}
-.o2 .chip i{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:o2blink 1s infinite}
-@keyframes o2blink{50%{opacity:.35}}
-.o2 .tag{top:548px}
-.o2 .big{left:147px;top:300px;width:96px;height:96px}
-.o2 .top{transform:scale(0);animation:o2pop 7s infinite}
-.o2 .bot{transform:scale(0);animation:o2pop2 7s infinite}
-@keyframes o2pop{0%,44%{transform:scale(0)}50%{transform:scale(1.15)}54%,100%{transform:scale(1)}}
-@keyframes o2pop2{0%,47%{transform:scale(0)}53%{transform:scale(1.15)}57%,100%{transform:scale(1)}}
-.o2 .lock{left:0;right:0;top:420px;display:flex;justify-content:center;opacity:0;animation:o2lock 7s infinite}
-@keyframes o2lock{0%,55%{opacity:0;transform:translateY(14px)}62%,100%{opacity:1;transform:none}}
-.o2 .sub{top:482px;opacity:0;animation:o2sub 7s infinite}
-@keyframes o2sub{0%,60%{opacity:0}66%,100%{opacity:1}}
-.o2 .app{transform:translateY(100%);border-radius:28px 28px 0 0;animation:o2rev 7s infinite}
-@keyframes o2rev{0%,72%{transform:translateY(100%);border-radius:28px 28px 0 0;animation-timing-function:cubic-bezier(.65,0,.25,1)}83%,100%{transform:translateY(0);border-radius:0}}
-
-/* ============ 3 · DO CAMPO AO PAINEL (7s) ============ */
-.o3 .scene{position:absolute;inset:0;animation:o3scene 7s infinite}
-@keyframes o3scene{0%,38%{opacity:1;transform:none}45%,100%{opacity:0;transform:translateY(30px)}}
-.o3 .drum{left:95px;top:340px;width:200px;height:150px;animation:o3wob 7s infinite;transform-origin:50% 100%}
-@keyframes o3wob{0%,9%{transform:none}11%{transform:rotate(-3deg)}13%{transform:rotate(2deg)}15%,18%{transform:none}20%{transform:rotate(3deg)}22%{transform:rotate(-2deg)}24%,100%{transform:none}}
-.o3 .g{width:14px;height:14px;border-radius:50%;animation:o3fall 7s infinite backwards}
-@keyframes o3fall{0%{transform:translateY(-520px);animation-timing-function:cubic-bezier(.5,0,.9,.5)}9%{transform:translateY(0)}10.5%{transform:translateY(-10px)}12%,100%{transform:translateY(0)}}
-.o3 .heat{opacity:0;animation:o3heat 7s infinite}
-@keyframes o3heat{0%,22%{opacity:0;transform:translateY(10px)}27%,34%{opacity:1;transform:translateY(-6px)}39%,100%{opacity:0;transform:translateY(-20px)}}
-.o3 .tag{top:540px;opacity:0;animation:o3tag 7s infinite}
-@keyframes o3tag{0%,16%{opacity:0;transform:translateY(12px)}22%,36%{opacity:1;transform:none}41%,100%{opacity:0}}
-.o3 .big{left:140px;top:300px;width:110px;height:110px;animation:o3drop 7s infinite}
-@keyframes o3drop{0%,44%{transform:translateY(-560px);animation-timing-function:cubic-bezier(.5,0,.9,.5)}52%{transform:translateY(14px)}55%{transform:translateY(-8px)}58%,100%{transform:translateY(0)}}
-.o3 .lock{left:0;right:0;top:432px;display:flex;justify-content:center;opacity:0;animation:o3lock 7s infinite}
-@keyframes o3lock{0%,58%{opacity:0;transform:translateY(12px)}65%,100%{opacity:1;transform:none}}
-.o3 .sub{top:494px;opacity:0;animation:o3sub 7s infinite}
-@keyframes o3sub{0%,63%{opacity:0}69%,100%{opacity:1}}
-.o3 .app{clip-path:inset(0 0 0 100%);animation:o3rev 7s infinite}
-@keyframes o3rev{0%,72%{clip-path:inset(0 0 0 100%);animation-timing-function:cubic-bezier(.7,0,.3,1)}82%,100%{clip-path:inset(0 0 0 0)}}
-
-/* ============ 4 · TRAÇADO (7s) ============ */
-.o4 .chart{left:0;top:300px;width:390px;height:200px;animation:o4chart 7s infinite}
-@keyframes o4chart{0%,33%{opacity:1}40%,100%{opacity:0}}
-.o4 .line{stroke-dasharray:1;stroke-dashoffset:1;animation:o4line 7s infinite}
-@keyframes o4line{0%{stroke-dashoffset:1;animation-timing-function:cubic-bezier(.4,0,.2,1)}26%,100%{stroke-dashoffset:0}}
-.o4 .head{offset-path:path("M-10 120 L40 120 L60 90 L80 140 L100 110 L130 110 L150 60 L170 150 L190 100 L230 100 L250 80 L270 125 L300 105 L400 105");animation:o4head 7s infinite}
-@keyframes o4head{0%{offset-distance:0%;opacity:1;animation-timing-function:cubic-bezier(.4,0,.2,1)}26%{offset-distance:100%;opacity:1}30%,100%{offset-distance:100%;opacity:0}}
-.o4 .tag{top:540px;opacity:0;animation:o4tag 7s infinite}
-@keyframes o4tag{0%,8%{opacity:0;transform:translateY(12px)}14%,32%{opacity:1;transform:none}38%,100%{opacity:0}}
-.o4 .big{left:125px;top:280px;width:140px;height:140px}
-.o4 .sym{fill:rgba(255,255,255,0);stroke:#fff;stroke-width:20;stroke-dasharray:1;stroke-dashoffset:1;animation:o4sym 7s infinite}
-@keyframes o4sym{0%,38%{stroke-dashoffset:1;fill:rgba(255,255,255,0);animation-timing-function:cubic-bezier(.5,0,.3,1)}54%{stroke-dashoffset:0;fill:rgba(255,255,255,0)}60%,100%{stroke-dashoffset:0;fill:rgba(255,255,255,1)}}
-.o4 .lock{left:0;right:0;top:446px;display:flex;justify-content:center;opacity:0;animation:o4lock 7s infinite}
-@keyframes o4lock{0%,58%{opacity:0;filter:blur(6px)}65%,100%{opacity:1;filter:none}}
-.o4 .sub{top:508px;opacity:0;animation:o4sub 7s infinite}
-@keyframes o4sub{0%,63%{opacity:0}69%,100%{opacity:1}}
-.o4 .app{opacity:0;animation:o4rev 7s infinite}
-.o4 .app>*{animation:o4up 7s infinite}
-@keyframes o4rev{0%,74%{opacity:0}82%,100%{opacity:1}}
-@keyframes o4up{0%,74%{transform:translateY(24px)}86%,100%{transform:none}}
-
-/* ============ 5 · CORTINA (5s) ============ */
-.o5{background:var(--bg)}
-.o5 .pnl{left:0;width:390px;height:422px;background:var(--logo)}
-.o5 .pt{top:0;animation:o5pt 5s infinite}
-.o5 .pb{top:422px;animation:o5pb 5s infinite}
-@keyframes o5pt{0%,56%{transform:none;animation-timing-function:cubic-bezier(.75,0,.25,1)}74%,100%{transform:translateY(-430px)}}
-@keyframes o5pb{0%,56%{transform:none;animation-timing-function:cubic-bezier(.75,0,.25,1)}74%,100%{transform:translateY(430px)}}
-.o5 .big{left:135px;top:362px;width:120px;height:120px;animation:o5beat 5s infinite}
-@keyframes o5beat{0%,14%{transform:none}19%{transform:scale(1.1)}24%{transform:scale(.97)}28%,100%{transform:none}}
-.o5 .top{animation:o5top 5s infinite}
-.o5 .bot{animation:o5bot 5s infinite}
-@keyframes o5top{0%,56%{transform:none;animation-timing-function:cubic-bezier(.75,0,.25,1)}74%,100%{transform:translateY(-2150px)}}
-@keyframes o5bot{0%,56%{transform:none;animation-timing-function:cubic-bezier(.75,0,.25,1)}74%,100%{transform:translateY(2150px)}}
-.o5 .lock{left:0;right:0;top:500px;display:flex;justify-content:center;opacity:0;animation:o5lock 5s infinite}
-@keyframes o5lock{0%,26%{opacity:0;transform:translateY(10px)}34%,46%{opacity:1;transform:none}53%,100%{opacity:0;transform:translateY(16px)}}
-.o5 .lock .words img{height:30px}.o5 .lock .words span{font-size:35px}
-.o5 .app>*{animation:o5up 5s infinite}
-@keyframes o5up{0%,62%{transform:scale(.96);opacity:.4}80%,100%{transform:none;opacity:1}}
-
-@media (prefers-reduced-motion: reduce){.note-rm{display:block!important}}
-.note-rm{display:none;max-width:1400px;margin:0 auto;padding:0 24px;color:#B25000;font-size:13px}
+/* 2 · Vidro */
+.blob{position:absolute;width:300px;height:300px;border-radius:50%;filter:blur(50px)}
+.gl{position:absolute;inset:0;transform-origin:center}
+.glass{position:absolute;inset:0;-webkit-backdrop-filter:blur(14px) saturate(1.6);backdrop-filter:blur(14px) saturate(1.6);background:linear-gradient(140deg,rgba(255,255,255,.45),rgba(255,255,255,.07));-webkit-mask-size:100% 100%;mask-size:100% 100%}
+.gl svg{position:absolute;inset:0}
 </style>
 </head>
 <body>
 <header>
   <div>
-    <h1>Abertura do PURO Link: 5 opções</h1>
-    <p>Mesma estrutura da abertura do iFood: tela cheia na cor da marca, uma cena curta com frase, a logo se montando e a passagem para a tela inicial. Tudo começa no verde <b>#003913</b> da splash atual, para emendar sem piscar. As animações repetem em loop.</p>
+    <h1>Abertura do PURO Link: rodada 2</h1>
+    <p>Nesta rodada só entra o ícone da marca, com movimento e morfismo no estilo das aberturas de big tech. Todas começam no verde <b>#003913</b> da splash atual e terminam na tela inicial do app. As animações repetem em loop.</p>
   </div>
   <div class="ctrls">
     <button class="btn" id="all">Reiniciar todas</button>
     <button class="btn" id="slow" aria-pressed="false">Câmera lenta</button>
   </div>
 </header>
-<p class="note-rm">Seu sistema está com “reduzir movimento” ligado; se as animações não rodarem, desligue essa opção para ver as opções.</p>
 
 <main class="grid">
 
 <section class="opt">
-  <h2><span>1</span> · Encaixe</h2>
-  <div class="frame"><div class="scaler"><div class="stage o1">
-    <div class="abs ring"></div>
-    <div class="abs big"><svg class="mk" viewBox="-96 0 591 591" width="160" height="160" aria-hidden="true">
-      <path class="top fb" fill="#fff" d="M110.5 0A92.5 92.5 0 0 1 203 92.5C203 168.5 239.5 196 306.5 196A92.5 92.5 0 1 1 214 288.5C214 213 177.5 185 110.5 185A92.5 92.5 0 0 1 110.5 0Z"/>
-      <path class="bot fb" fill="#fff" d="M92.5 210A92.5 92.5 0 0 1 185 302.5C185 378.5 221.5 406 288.5 406A92.5 92.5 0 1 1 196 498.5C196 423 159.5 395 92.5 395A92.5 92.5 0 0 1 92.5 210Z"/>
-    </svg></div>
-    <div class="tag">Suas máquinas, conectadas.</div>
-    <div class="abs lock"><div class="words"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDIgMTUyIj48cGF0aCBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDc0TDAgMTQ4IDE2IDE0OEwzMiAxNDggMzIgMTIxLjVMMzIgOTUgNTYuOCA5NUM4NC40IDk1IDkwLjIgOTQuMSAxMDAuMyA4OC44QzExMS4zIDgyLjkgMTE4LjUgNzMuNSAxMjEuNSA2MC45QzEyNC4zIDQ4LjggMTIyLjggMzMuNSAxMTcuOSAyMy44QzExNC42IDE3LjQgMTA2LjcgOS42IDk5LjcgNi4xQzg4LjcgMC41IDgzLjggMCAzOS44IDBMMCAwIDAgNzRNMzIuOCAyNS41QzMyLjMgMjYgMzIgMzYuMiAzMiA0OC4zTDMyIDcwLjIgNTMuMyA2OS44TDc0LjYgNjkuNCA4MC4zIDY2LjZDODcuOSA2Mi45IDkxLjEgNTcuNyA5MS4yIDQ4LjhDOTEuMyA0NS4zIDkwLjggNDAuOCA5MC4xIDM4LjhDODguNiAzNC4yIDgyLjQgMjguNSA3Ny4zIDI3QzcyLjcgMjUuNyAzMy44IDI0LjQgMzIuOCAyNS41TTEzOC4zIDgwLjNDMTM4LjYgMTA4LjcgMTM5LjEgMTI0IDEzOS45IDEyNy4xQzE0MS44IDEzNC41IDE0Ni45IDE0Mi4xIDE1Mi4zIDE0NS43QzE1OC4zIDE0OS43IDE2Mi4zIDE1MC45IDE3Mi41IDE1MS43QzE4Ni43IDE1Mi43IDE5Ny4xIDE0OS4xIDIwNS44IDE0MC4yTDIxMSAxMzQuNyAyMTEgMTQxLjlMMjExIDE0OSAyMjUgMTQ5TDIzOSAxNDkgMjM5IDkzLjVMMjM5IDM4IDIyNCAzOEwyMDkgMzggMjA5IDczLjNDMjA5IDExMy41IDIwOC42IDExNi43IDIwMi4xIDEyMy4xQzE5NC44IDEzMC41IDE4MC45IDEzMS4xIDE3My44IDEyNC4zQzE2OC41IDExOS4yIDE2OCAxMTUuMyAxNjggNzQuOEwxNjggMzggMTUyLjkgMzhMMTM3LjkgMzggMTM4LjMgODAuM00yNTUgOTNMMjU1IDE0OCAyNjkuNCAxNDhMMjgzLjggMTQ4IDI4NC4yIDExOC4zTDI4NC42IDg4LjUgMjg2LjggODIuOUMyODkuNSA3Ni4xIDI5NC44IDcwLjQgMzAwLjggNjcuN0MzMDQuMyA2Ni4yIDMwNy40IDY1LjggMzE0LjcgNjUuOEwzMjQgNjUuOSAzMjQgNTIuNUMzMjQgMzcuNSAzMjQuMiAzOCAzMTYuMiAzOEMzMDUuNSAzOC4xIDI5My4zIDQ1IDI4Ni45IDU0LjRMMjgzIDYwLjIgMjgzIDQ5LjFMMjgzIDM4IDI2OSAzOEwyNTUgMzggMjU1IDkzTTM3Mi4zIDM5LjVDMzQ1LjYgNDUuMyAzMjkuNCA2OS4yIDMzMS41IDk5LjVDMzMzLjcgMTMxLjEgMzU0LjkgMTUxLjEgMzg2LjQgMTUxQzQxNC4zIDE1MC45IDQzNC4xIDEzNi40IDQ0MC41IDExMS41QzQ0Mi40IDEwMy45IDQ0Mi40IDg2LjUgNDQwLjUgNzguMUM0MzcgNjMuNCA0MjYuNCA0OS45IDQxMy43IDQzLjlDNDAxLjYgMzguMyAzODUuNyAzNi42IDM3Mi4zIDM5LjVNMzgwLjEgNjFDMzczLjggNjIuNSAzNjguOCA2NyAzNjUgNzQuNUwzNjEuNSA4MS41IDM2MS41IDk0LjVDMzYxLjYgMTA1LjYgMzYxLjkgMTA4LjMgMzYzLjggMTEzLjJDMzY2LjYgMTIwLjEgMzczIDEyNi40IDM3OS4yIDEyOEMzODguMyAxMzAuNSAzOTkuOSAxMjcuNCA0MDUuMyAxMjEuMUM0MTAuMiAxMTUuMiA0MTIuMyAxMDcuNiA0MTIuNCA5NS41QzQxMi41IDgwLjMgNDEwLjYgNzQuMiA0MDMuNiA2Ny40QzM5Ni44IDYwLjggMzg5LjUgNTguOCAzODAuMSA2MSIvPjwvc3ZnPg==" alt="Puro"><span>Link</span></div></div>
-    <div class="sub">TELEMETRIA INDUSTRIAL</div>
-    <div class="app" data-app></div>
-  </div></div></div>
-  <p>Os dois elos do símbolo caem de cima e de baixo e se encaixam com um “clique” e uma onda. O símbolo vai para a esquerda e o nome aparece ao lado. A tela inicial se abre num círculo a partir do símbolo.</p>
-  <button class="btn" data-replay>Reiniciar</button>
-</section>
-
-<section class="opt">
-  <h2><span>2</span> · Sinal ao vivo</h2>
-  <div class="frame"><div class="scaler"><div class="stage o2">
-    <div class="scene">
-      <span class="abs pkt"></span><span class="abs pkt p2"></span><span class="abs pkt p3"></span>
-      <svg class="abs mach" viewBox="0 0 220 170" aria-hidden="true" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-        <path class="arc" d="M96 22a16 16 0 0 1 22 0"/>
-        <path class="arc a2" d="M86 10a30 30 0 0 1 42 0"/>
-        <path class="arc a3" d="M76 -2a44 44 0 0 1 62 0"/>
-        <rect x="150" y="34" width="18" height="34" rx="3"/>
-        <rect x="20" y="62" width="180" height="80" rx="14"/>
-        <circle cx="90" cy="102" r="28"/>
-        <g class="spk fb"><path d="M90 78v48M66 102h48M73 85l34 34M107 85l-34 34" stroke-width="3" opacity=".7"/></g>
-        <rect x="140" y="88" width="40" height="10" rx="5" fill="#6DAF47" stroke="none"/>
-        <rect x="140" y="106" width="26" height="10" rx="5" fill="rgba(255,255,255,.35)" stroke="none"/>
-        <circle cx="50" cy="152" r="10"/><circle cx="170" cy="152" r="10"/>
-      </svg>
-      <div class="abs chip"><div><i></i>Secando</div></div>
-      <div class="tag">Sua máquina ao vivo, no bolso.</div>
+  <h2><span>1</span> · Gota</h2>
+  <div class="frame"><div class="scaler"><div class="stage green s1">
+    <div class="abs glow" style="left:45px;top:215px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(109,175,71,.45),transparent 65%);opacity:0"></div>
+    <div class="abs mark" style="left:120px;top:290px;width:150px;height:150px;transform-origin:52.4px 23.5px">
+      <svg viewBox="-96 0 591 591" width="150" height="150" aria-hidden="true"><path data-top fill="#fff"/><path data-bot fill="#fff"/></svg>
     </div>
-    <div class="abs big"><svg viewBox="-96 0 591 591" width="96" height="96" aria-hidden="true">
-      <path class="top fb" fill="#fff" d="M110.5 0A92.5 92.5 0 0 1 203 92.5C203 168.5 239.5 196 306.5 196A92.5 92.5 0 1 1 214 288.5C214 213 177.5 185 110.5 185A92.5 92.5 0 0 1 110.5 0Z"/>
-      <path class="bot fb" fill="#fff" d="M92.5 210A92.5 92.5 0 0 1 185 302.5C185 378.5 221.5 406 288.5 406A92.5 92.5 0 1 1 196 498.5C196 423 159.5 395 92.5 395A92.5 92.5 0 0 1 92.5 210Z"/>
-    </svg></div>
-    <div class="abs lock"><div class="words"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDIgMTUyIj48cGF0aCBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDc0TDAgMTQ4IDE2IDE0OEwzMiAxNDggMzIgMTIxLjVMMzIgOTUgNTYuOCA5NUM4NC40IDk1IDkwLjIgOTQuMSAxMDAuMyA4OC44QzExMS4zIDgyLjkgMTE4LjUgNzMuNSAxMjEuNSA2MC45QzEyNC4zIDQ4LjggMTIyLjggMzMuNSAxMTcuOSAyMy44QzExNC42IDE3LjQgMTA2LjcgOS42IDk5LjcgNi4xQzg4LjcgMC41IDgzLjggMCAzOS44IDBMMCAwIDAgNzRNMzIuOCAyNS41QzMyLjMgMjYgMzIgMzYuMiAzMiA0OC4zTDMyIDcwLjIgNTMuMyA2OS44TDc0LjYgNjkuNCA4MC4zIDY2LjZDODcuOSA2Mi45IDkxLjEgNTcuNyA5MS4yIDQ4LjhDOTEuMyA0NS4zIDkwLjggNDAuOCA5MC4xIDM4LjhDODguNiAzNC4yIDgyLjQgMjguNSA3Ny4zIDI3QzcyLjcgMjUuNyAzMy44IDI0LjQgMzIuOCAyNS41TTEzOC4zIDgwLjNDMTM4LjYgMTA4LjcgMTM5LjEgMTI0IDEzOS45IDEyNy4xQzE0MS44IDEzNC41IDE0Ni45IDE0Mi4xIDE1Mi4zIDE0NS43QzE1OC4zIDE0OS43IDE2Mi4zIDE1MC45IDE3Mi41IDE1MS43QzE4Ni43IDE1Mi43IDE5Ny4xIDE0OS4xIDIwNS44IDE0MC4yTDIxMSAxMzQuNyAyMTEgMTQxLjlMMjExIDE0OSAyMjUgMTQ5TDIzOSAxNDkgMjM5IDkzLjVMMjM5IDM4IDIyNCAzOEwyMDkgMzggMjA5IDczLjNDMjA5IDExMy41IDIwOC42IDExNi43IDIwMi4xIDEyMy4xQzE5NC44IDEzMC41IDE4MC45IDEzMS4xIDE3My44IDEyNC4zQzE2OC41IDExOS4yIDE2OCAxMTUuMyAxNjggNzQuOEwxNjggMzggMTUyLjkgMzhMMTM3LjkgMzggMTM4LjMgODAuM00yNTUgOTNMMjU1IDE0OCAyNjkuNCAxNDhMMjgzLjggMTQ4IDI4NC4yIDExOC4zTDI4NC42IDg4LjUgMjg2LjggODIuOUMyODkuNSA3Ni4xIDI5NC44IDcwLjQgMzAwLjggNjcuN0MzMDQuMyA2Ni4yIDMwNy40IDY1LjggMzE0LjcgNjUuOEwzMjQgNjUuOSAzMjQgNTIuNUMzMjQgMzcuNSAzMjQuMiAzOCAzMTYuMiAzOEMzMDUuNSAzOC4xIDI5My4zIDQ1IDI4Ni45IDU0LjRMMjgzIDYwLjIgMjgzIDQ5LjFMMjgzIDM4IDI2OSAzOEwyNTUgMzggMjU1IDkzTTM3Mi4zIDM5LjVDMzQ1LjYgNDUuMyAzMjkuNCA2OS4yIDMzMS41IDk5LjVDMzMzLjcgMTMxLjEgMzU0LjkgMTUxLjEgMzg2LjQgMTUxQzQxNC4zIDE1MC45IDQzNC4xIDEzNi40IDQ0MC41IDExMS41QzQ0Mi40IDEwMy45IDQ0Mi40IDg2LjUgNDQwLjUgNzguMUM0MzcgNjMuNCA0MjYuNCA0OS45IDQxMy43IDQzLjlDNDAxLjYgMzguMyAzODUuNyAzNi42IDM3Mi4zIDM5LjVNMzgwLjEgNjFDMzczLjggNjIuNSAzNjguOCA2NyAzNjUgNzQuNUwzNjEuNSA4MS41IDM2MS41IDk0LjVDMzYxLjYgMTA1LjYgMzYxLjkgMTA4LjMgMzYzLjggMTEzLjJDMzY2LjYgMTIwLjEgMzczIDEyNi40IDM3OS4yIDEyOEMzODguMyAxMzAuNSAzOTkuOSAxMjcuNCA0MDUuMyAxMjEuMUM0MTAuMiAxMTUuMiA0MTIuMyAxMDcuNiA0MTIuNCA5NS41QzQxMi41IDgwLjMgNDEwLjYgNzQuMiA0MDMuNiA2Ny40QzM5Ni44IDYwLjggMzg5LjUgNTguOCAzODAuMSA2MSIvPjwvc3ZnPg==" alt="Puro"><span>Link</span></div></div>
-    <div class="sub">TELEMETRIA INDUSTRIAL</div>
-    <div class="app" data-app></div>
+    <div class="lockup" style="top:470px"><div class="words"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDIgMTUyIj48cGF0aCBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDc0TDAgMTQ4IDE2IDE0OEwzMiAxNDggMzIgMTIxLjVMMzIgOTUgNTYuOCA5NUM4NC40IDk1IDkwLjIgOTQuMSAxMDAuMyA4OC44QzExMS4zIDgyLjkgMTE4LjUgNzMuNSAxMjEuNSA2MC45QzEyNC4zIDQ4LjggMTIyLjggMzMuNSAxMTcuOSAyMy44QzExNC42IDE3LjQgMTA2LjcgOS42IDk5LjcgNi4xQzg4LjcgMC41IDgzLjggMCAzOS44IDBMMCAwIDAgNzRNMzIuOCAyNS41QzMyLjMgMjYgMzIgMzYuMiAzMiA0OC4zTDMyIDcwLjIgNTMuMyA2OS44TDc0LjYgNjkuNCA4MC4zIDY2LjZDODcuOSA2Mi45IDkxLjEgNTcuNyA5MS4yIDQ4LjhDOTEuMyA0NS4zIDkwLjggNDAuOCA5MC4xIDM4LjhDODguNiAzNC4yIDgyLjQgMjguNSA3Ny4zIDI3QzcyLjcgMjUuNyAzMy44IDI0LjQgMzIuOCAyNS41TTEzOC4zIDgwLjNDMTM4LjYgMTA4LjcgMTM5LjEgMTI0IDEzOS45IDEyNy4xQzE0MS44IDEzNC41IDE0Ni45IDE0Mi4xIDE1Mi4zIDE0NS43QzE1OC4zIDE0OS43IDE2Mi4zIDE1MC45IDE3Mi41IDE1MS43QzE4Ni43IDE1Mi43IDE5Ny4xIDE0OS4xIDIwNS44IDE0MC4yTDIxMSAxMzQuNyAyMTEgMTQxLjlMMjExIDE0OSAyMjUgMTQ5TDIzOSAxNDkgMjM5IDkzLjVMMjM5IDM4IDIyNCAzOEwyMDkgMzggMjA5IDczLjNDMjA5IDExMy41IDIwOC42IDExNi43IDIwMi4xIDEyMy4xQzE5NC44IDEzMC41IDE4MC45IDEzMS4xIDE3My44IDEyNC4zQzE2OC41IDExOS4yIDE2OCAxMTUuMyAxNjggNzQuOEwxNjggMzggMTUyLjkgMzhMMTM3LjkgMzggMTM4LjMgODAuM00yNTUgOTNMMjU1IDE0OCAyNjkuNCAxNDhMMjgzLjggMTQ4IDI4NC4yIDExOC4zTDI4NC42IDg4LjUgMjg2LjggODIuOUMyODkuNSA3Ni4xIDI5NC44IDcwLjQgMzAwLjggNjcuN0MzMDQuMyA2Ni4yIDMwNy40IDY1LjggMzE0LjcgNjUuOEwzMjQgNjUuOSAzMjQgNTIuNUMzMjQgMzcuNSAzMjQuMiAzOCAzMTYuMiAzOEMzMDUuNSAzOC4xIDI5My4zIDQ1IDI4Ni45IDU0LjRMMjgzIDYwLjIgMjgzIDQ5LjFMMjgzIDM4IDI2OSAzOEwyNTUgMzggMjU1IDkzTTM3Mi4zIDM5LjVDMzQ1LjYgNDUuMyAzMjkuNCA2OS4yIDMzMS41IDk5LjVDMzMzLjcgMTMxLjEgMzU0LjkgMTUxLjEgMzg2LjQgMTUxQzQxNC4zIDE1MC45IDQzNC4xIDEzNi40IDQ0MC41IDExMS41QzQ0Mi40IDEwMy45IDQ0Mi40IDg2LjUgNDQwLjUgNzguMUM0MzcgNjMuNCA0MjYuNCA0OS45IDQxMy43IDQzLjlDNDAxLjYgMzguMyAzODUuNyAzNi42IDM3Mi4zIDM5LjVNMzgwLjEgNjFDMzczLjggNjIuNSAzNjguOCA2NyAzNjUgNzQuNUwzNjEuNSA4MS41IDM2MS41IDk0LjVDMzYxLjYgMTA1LjYgMzYxLjkgMTA4LjMgMzYzLjggMTEzLjJDMzY2LjYgMTIwLjEgMzczIDEyNi40IDM3OS4yIDEyOEMzODguMyAxMzAuNSAzOTkuOSAxMjcuNCA0MDUuMyAxMjEuMUM0MTAuMiAxMTUuMiA0MTIuMyAxMDcuNiA0MTIuNCA5NS41QzQxMi41IDgwLjMgNDEwLjYgNzQuMiA0MDMuNiA2Ny40QzM5Ni44IDYwLjggMzg5LjUgNTguOCAzODAuMSA2MSIvPjwvc3ZnPg==" alt="Puro"><span>Link</span></div><div class="sub">TELEMETRIA INDUSTRIAL</div></div>
+    <div class="app" data-app style="opacity:0"></div>
   </div></div></div>
-  <p>Um secador desenhado em traço branco, com o tambor girando, emite sinal e pacotes de dados sobem pela tela. Os elos aparecem um após o outro e a tela inicial sobe como uma folha.</p>
+  <p>Morfismo líquido. Um ponto vira círculo e escorre até formar o primeiro elo, depois o segundo. Na saída, a câmera mergulha dentro do ícone até a tela ficar clara e o app aparecer.</p>
   <button class="btn" data-replay>Reiniciar</button>
 </section>
 
 <section class="opt">
-  <h2><span>3</span> · Do campo ao painel</h2>
-  <div class="frame"><div class="scaler"><div class="stage o3">
-    <div class="scene">
-      <svg class="abs heat" style="left:135px;top:290px" width="120" height="50" viewBox="0 0 120 50" aria-hidden="true" fill="none" stroke="#FF9F0A" stroke-width="3" stroke-linecap="round" opacity=".8">
-        <path d="M20 48c-8-10 8-16 0-26s8-16 0-22"/><path d="M60 48c-8-10 8-16 0-26s8-16 0-22"/><path d="M100 48c-8-10 8-16 0-26s8-16 0-22"/>
-      </svg>
-      <span class="abs g" style="left:150px;top:432px;background:#6DAF47;animation-delay:0s"></span>
-      <span class="abs g" style="left:186px;top:438px;background:#C2D6C0;animation-delay:.12s"></span>
-      <span class="abs g" style="left:220px;top:430px;background:#FF9F0A;animation-delay:.24s;width:11px;height:11px"></span>
-      <span class="abs g" style="left:166px;top:420px;background:#fff;animation-delay:.36s;width:12px;height:12px"></span>
-      <span class="abs g" style="left:204px;top:418px;background:#6DAF47;animation-delay:.48s"></span>
-      <span class="abs g" style="left:236px;top:422px;background:#C2D6C0;animation-delay:.6s;width:12px;height:12px"></span>
-      <span class="abs g" style="left:180px;top:404px;background:#FF9F0A;animation-delay:.72s;width:12px;height:12px"></span>
-      <span class="abs g" style="left:216px;top:404px;background:#fff;animation-delay:.84s;width:11px;height:11px"></span>
-      <span class="abs g" style="left:196px;top:392px;background:#6DAF47;animation-delay:.96s"></span>
-      <svg class="abs drum" viewBox="0 0 200 150" aria-hidden="true" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
-        <ellipse cx="100" cy="22" rx="86" ry="14" opacity=".5"/>
-        <path d="M14 22 L28 128 Q100 150 172 128 L186 22"/>
-        <path d="M22 70 Q100 90 178 70" opacity=".45"/>
-        <path d="M60 32 L66 136M140 32 L134 136" opacity=".3"/>
-      </svg>
-      <div class="tag">Do campo ao painel.</div>
+  <h2><span>2</span> · Vidro</h2>
+  <div class="frame"><div class="scaler"><div class="stage s2">
+    <div class="abs content" style="inset:0">
+      <div class="blob" style="left:-40px;top:160px;background:#6DAF47;opacity:.55"></div>
+      <div class="blob" style="left:150px;top:330px;background:#3B6B35;opacity:.9"></div>
+      <div class="blob" style="left:40px;top:470px;background:#8BA587;opacity:.4"></div>
+      <div class="abs" style="left:100px;top:280px;width:190px;height:190px">
+        <div class="gl"><div class="glass"></div><svg viewBox="-96 0 591 591" width="190" height="190" aria-hidden="true"><path class="solid" data-top fill="#fff" opacity="0"/><path class="edge" data-top fill="none" stroke="rgba(255,255,255,.75)" stroke-width="6"/></svg></div>
+        <div class="gl"><div class="glass"></div><svg viewBox="-96 0 591 591" width="190" height="190" aria-hidden="true"><path class="solid" data-bot fill="#fff" opacity="0"/><path class="edge" data-bot fill="none" stroke="rgba(255,255,255,.75)" stroke-width="6"/></svg></div>
+        <div class="shine" data-sym-mask><i></i></div>
+      </div>
+      <div class="lockup" style="top:495px"><div class="words"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDIgMTUyIj48cGF0aCBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDc0TDAgMTQ4IDE2IDE0OEwzMiAxNDggMzIgMTIxLjVMMzIgOTUgNTYuOCA5NUM4NC40IDk1IDkwLjIgOTQuMSAxMDAuMyA4OC44QzExMS4zIDgyLjkgMTE4LjUgNzMuNSAxMjEuNSA2MC45QzEyNC4zIDQ4LjggMTIyLjggMzMuNSAxMTcuOSAyMy44QzExNC42IDE3LjQgMTA2LjcgOS42IDk5LjcgNi4xQzg4LjcgMC41IDgzLjggMCAzOS44IDBMMCAwIDAgNzRNMzIuOCAyNS41QzMyLjMgMjYgMzIgMzYuMiAzMiA0OC4zTDMyIDcwLjIgNTMuMyA2OS44TDc0LjYgNjkuNCA4MC4zIDY2LjZDODcuOSA2Mi45IDkxLjEgNTcuNyA5MS4yIDQ4LjhDOTEuMyA0NS4zIDkwLjggNDAuOCA5MC4xIDM4LjhDODguNiAzNC4yIDgyLjQgMjguNSA3Ny4zIDI3QzcyLjcgMjUuNyAzMy44IDI0LjQgMzIuOCAyNS41TTEzOC4zIDgwLjNDMTM4LjYgMTA4LjcgMTM5LjEgMTI0IDEzOS45IDEyNy4xQzE0MS44IDEzNC41IDE0Ni45IDE0Mi4xIDE1Mi4zIDE0NS43QzE1OC4zIDE0OS43IDE2Mi4zIDE1MC45IDE3Mi41IDE1MS43QzE4Ni43IDE1Mi43IDE5Ny4xIDE0OS4xIDIwNS44IDE0MC4yTDIxMSAxMzQuNyAyMTEgMTQxLjlMMjExIDE0OSAyMjUgMTQ5TDIzOSAxNDkgMjM5IDkzLjVMMjM5IDM4IDIyNCAzOEwyMDkgMzggMjA5IDczLjNDMjA5IDExMy41IDIwOC42IDExNi43IDIwMi4xIDEyMy4xQzE5NC44IDEzMC41IDE4MC45IDEzMS4xIDE3My44IDEyNC4zQzE2OC41IDExOS4yIDE2OCAxMTUuMyAxNjggNzQuOEwxNjggMzggMTUyLjkgMzhMMTM3LjkgMzggMTM4LjMgODAuM00yNTUgOTNMMjU1IDE0OCAyNjkuNCAxNDhMMjgzLjggMTQ4IDI4NC4yIDExOC4zTDI4NC42IDg4LjUgMjg2LjggODIuOUMyODkuNSA3Ni4xIDI5NC44IDcwLjQgMzAwLjggNjcuN0MzMDQuMyA2Ni4yIDMwNy40IDY1LjggMzE0LjcgNjUuOEwzMjQgNjUuOSAzMjQgNTIuNUMzMjQgMzcuNSAzMjQuMiAzOCAzMTYuMiAzOEMzMDUuNSAzOC4xIDI5My4zIDQ1IDI4Ni45IDU0LjRMMjgzIDYwLjIgMjgzIDQ5LjFMMjgzIDM4IDI2OSAzOEwyNTUgMzggMjU1IDkzTTM3Mi4zIDM5LjVDMzQ1LjYgNDUuMyAzMjkuNCA2OS4yIDMzMS41IDk5LjVDMzMzLjcgMTMxLjEgMzU0LjkgMTUxLjEgMzg2LjQgMTUxQzQxNC4zIDE1MC45IDQzNC4xIDEzNi40IDQ0MC41IDExMS41QzQ0Mi40IDEwMy45IDQ0Mi40IDg2LjUgNDQwLjUgNzguMUM0MzcgNjMuNCA0MjYuNCA0OS45IDQxMy43IDQzLjlDNDAxLjYgMzguMyAzODUuNyAzNi42IDM3Mi4zIDM5LjVNMzgwLjEgNjFDMzczLjggNjIuNSAzNjguOCA2NyAzNjUgNzQuNUwzNjEuNSA4MS41IDM2MS41IDk0LjVDMzYxLjYgMTA1LjYgMzYxLjkgMTA4LjMgMzYzLjggMTEzLjJDMzY2LjYgMTIwLjEgMzczIDEyNi40IDM3OS4yIDEyOEMzODguMyAxMzAuNSAzOTkuOSAxMjcuNCA0MDUuMyAxMjEuMUM0MTAuMiAxMTUuMiA0MTIuMyAxMDcuNiA0MTIuNCA5NS41QzQxMi41IDgwLjMgNDEwLjYgNzQuMiA0MDMuNiA2Ny40QzM5Ni44IDYwLjggMzg5LjUgNTguOCAzODAuMSA2MSIvPjwvc3ZnPg==" alt="Puro"><span>Link</span></div><div class="sub">TELEMETRIA INDUSTRIAL</div></div>
     </div>
-    <div class="abs big"><svg viewBox="-96 0 591 591" width="110" height="110" aria-hidden="true">
-      <path fill="#fff" d="M110.5 0A92.5 92.5 0 0 1 203 92.5C203 168.5 239.5 196 306.5 196A92.5 92.5 0 1 1 214 288.5C214 213 177.5 185 110.5 185A92.5 92.5 0 0 1 110.5 0ZM92.5 210A92.5 92.5 0 0 1 185 302.5C185 378.5 221.5 406 288.5 406A92.5 92.5 0 1 1 196 498.5C196 423 159.5 395 92.5 395A92.5 92.5 0 0 1 92.5 210Z"/>
-    </svg></div>
-    <div class="abs lock"><div class="words"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDIgMTUyIj48cGF0aCBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDc0TDAgMTQ4IDE2IDE0OEwzMiAxNDggMzIgMTIxLjVMMzIgOTUgNTYuOCA5NUM4NC40IDk1IDkwLjIgOTQuMSAxMDAuMyA4OC44QzExMS4zIDgyLjkgMTE4LjUgNzMuNSAxMjEuNSA2MC45QzEyNC4zIDQ4LjggMTIyLjggMzMuNSAxMTcuOSAyMy44QzExNC42IDE3LjQgMTA2LjcgOS42IDk5LjcgNi4xQzg4LjcgMC41IDgzLjggMCAzOS44IDBMMCAwIDAgNzRNMzIuOCAyNS41QzMyLjMgMjYgMzIgMzYuMiAzMiA0OC4zTDMyIDcwLjIgNTMuMyA2OS44TDc0LjYgNjkuNCA4MC4zIDY2LjZDODcuOSA2Mi45IDkxLjEgNTcuNyA5MS4yIDQ4LjhDOTEuMyA0NS4zIDkwLjggNDAuOCA5MC4xIDM4LjhDODguNiAzNC4yIDgyLjQgMjguNSA3Ny4zIDI3QzcyLjcgMjUuNyAzMy44IDI0LjQgMzIuOCAyNS41TTEzOC4zIDgwLjNDMTM4LjYgMTA4LjcgMTM5LjEgMTI0IDEzOS45IDEyNy4xQzE0MS44IDEzNC41IDE0Ni45IDE0Mi4xIDE1Mi4zIDE0NS43QzE1OC4zIDE0OS43IDE2Mi4zIDE1MC45IDE3Mi41IDE1MS43QzE4Ni43IDE1Mi43IDE5Ny4xIDE0OS4xIDIwNS44IDE0MC4yTDIxMSAxMzQuNyAyMTEgMTQxLjlMMjExIDE0OSAyMjUgMTQ5TDIzOSAxNDkgMjM5IDkzLjVMMjM5IDM4IDIyNCAzOEwyMDkgMzggMjA5IDczLjNDMjA5IDExMy41IDIwOC42IDExNi43IDIwMi4xIDEyMy4xQzE5NC44IDEzMC41IDE4MC45IDEzMS4xIDE3My44IDEyNC4zQzE2OC41IDExOS4yIDE2OCAxMTUuMyAxNjggNzQuOEwxNjggMzggMTUyLjkgMzhMMTM3LjkgMzggMTM4LjMgODAuM00yNTUgOTNMMjU1IDE0OCAyNjkuNCAxNDhMMjgzLjggMTQ4IDI4NC4yIDExOC4zTDI4NC42IDg4LjUgMjg2LjggODIuOUMyODkuNSA3Ni4xIDI5NC44IDcwLjQgMzAwLjggNjcuN0MzMDQuMyA2Ni4yIDMwNy40IDY1LjggMzE0LjcgNjUuOEwzMjQgNjUuOSAzMjQgNTIuNUMzMjQgMzcuNSAzMjQuMiAzOCAzMTYuMiAzOEMzMDUuNSAzOC4xIDI5My4zIDQ1IDI4Ni45IDU0LjRMMjgzIDYwLjIgMjgzIDQ5LjFMMjgzIDM4IDI2OSAzOEwyNTUgMzggMjU1IDkzTTM3Mi4zIDM5LjVDMzQ1LjYgNDUuMyAzMjkuNCA2OS4yIDMzMS41IDk5LjVDMzMzLjcgMTMxLjEgMzU0LjkgMTUxLjEgMzg2LjQgMTUxQzQxNC4zIDE1MC45IDQzNC4xIDEzNi40IDQ0MC41IDExMS41QzQ0Mi40IDEwMy45IDQ0Mi40IDg2LjUgNDQwLjUgNzguMUM0MzcgNjMuNCA0MjYuNCA0OS45IDQxMy43IDQzLjlDNDAxLjYgMzguMyAzODUuNyAzNi42IDM3Mi4zIDM5LjVNMzgwLjEgNjFDMzczLjggNjIuNSAzNjguOCA2NyAzNjUgNzQuNUwzNjEuNSA4MS41IDM2MS41IDk0LjVDMzYxLjYgMTA1LjYgMzYxLjkgMTA4LjMgMzYzLjggMTEzLjJDMzY2LjYgMTIwLjEgMzczIDEyNi40IDM3OS4yIDEyOEMzODguMyAxMzAuNSAzOTkuOSAxMjcuNCA0MDUuMyAxMjEuMUM0MTAuMiAxMTUuMiA0MTIuMyAxMDcuNiA0MTIuNCA5NS41QzQxMi41IDgwLjMgNDEwLjYgNzQuMiA0MDMuNiA2Ny40QzM5Ni44IDYwLjggMzg5LjUgNTguOCAzODAuMSA2MSIvPjwvc3ZnPg==" alt="Puro"><span>Link</span></div></div>
-    <div class="sub">TELEMETRIA INDUSTRIAL</div>
-    <div class="app" data-app></div>
+    <div class="app" data-app style="opacity:0"></div>
   </div></div></div>
-  <p>A cena mais próxima da “cesta” do iFood, com assunto próprio: grãos de solo caem num tambor, ele balança e o calor sobe. O símbolo cai e quica, e a tela inicial entra varrendo da direita.</p>
+  <p>Glassmorfismo. Os dois elos chegam de lados opostos, girando em 3D, como placas de vidro fosco sobre luzes verdes em movimento. Ao encaixar, um brilho passa e o vidro vira o ícone sólido. A saída desfoca tudo e o app entra nítido.</p>
   <button class="btn" data-replay>Reiniciar</button>
 </section>
 
 <section class="opt">
-  <h2><span>4</span> · Traçado</h2>
-  <div class="frame"><div class="scaler"><div class="stage o4">
-    <svg class="abs chart" viewBox="0 0 390 200" aria-hidden="true" fill="none">
-      <path d="M0 40H390M0 80H390M0 120H390M0 160H390" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-      <path class="line" pathLength="1" d="M-10 120 L40 120 L60 90 L80 140 L100 110 L130 110 L150 60 L170 150 L190 100 L230 100 L250 80 L270 125 L300 105 L400 105" stroke="#6DAF47" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
-      <circle class="head" r="7" fill="#fff"/>
+  <h2><span>3</span> · Janela</h2>
+  <div class="frame"><div class="scaler"><div class="stage s3" style="background:var(--bg)">
+    <div class="app" data-app></div>
+    <svg class="abs" style="left:0;top:0" width="390" height="844" viewBox="0 0 390 844" aria-hidden="true">
+      <defs>
+        <radialGradient id="g3" cx="50%" cy="43%" r="70%"><stop offset="0" stop-color="#0C5A25"/><stop offset=".52" stop-color="#003913"/><stop offset="1" stop-color="#00240B"/></radialGradient>
+        <mask id="m3" maskUnits="userSpaceOnUse" x="-4" y="-4" width="398" height="852">
+          <rect x="-4" y="-4" width="398" height="852" fill="#fff"/>
+          <g data-hole visibility="hidden"><g transform="translate(144.37 300) scale(.2538)"><path data-sym fill="#000"/></g></g>
+        </mask>
+      </defs>
+      <rect x="-4" y="-4" width="398" height="852" fill="url(#g3)" mask="url(#m3)"/>
+      <g data-white><g transform="translate(144.37 300) scale(.2538)"><path data-top class="fb" fill="#fff"/><path data-bot class="fb" fill="#fff"/></g></g>
     </svg>
-    <div class="tag">Telemetria em tempo real.</div>
-    <div class="abs big"><svg viewBox="-96 0 591 591" width="140" height="140" aria-hidden="true">
-      <path class="sym" pathLength="1" d="M110.5 0A92.5 92.5 0 0 1 203 92.5C203 168.5 239.5 196 306.5 196A92.5 92.5 0 1 1 214 288.5C214 213 177.5 185 110.5 185A92.5 92.5 0 0 1 110.5 0ZM92.5 210A92.5 92.5 0 0 1 185 302.5C185 378.5 221.5 406 288.5 406A92.5 92.5 0 1 1 196 498.5C196 423 159.5 395 92.5 395A92.5 92.5 0 0 1 92.5 210Z"/>
-    </svg></div>
-    <div class="abs lock"><div class="words"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDIgMTUyIj48cGF0aCBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDc0TDAgMTQ4IDE2IDE0OEwzMiAxNDggMzIgMTIxLjVMMzIgOTUgNTYuOCA5NUM4NC40IDk1IDkwLjIgOTQuMSAxMDAuMyA4OC44QzExMS4zIDgyLjkgMTE4LjUgNzMuNSAxMjEuNSA2MC45QzEyNC4zIDQ4LjggMTIyLjggMzMuNSAxMTcuOSAyMy44QzExNC42IDE3LjQgMTA2LjcgOS42IDk5LjcgNi4xQzg4LjcgMC41IDgzLjggMCAzOS44IDBMMCAwIDAgNzRNMzIuOCAyNS41QzMyLjMgMjYgMzIgMzYuMiAzMiA0OC4zTDMyIDcwLjIgNTMuMyA2OS44TDc0LjYgNjkuNCA4MC4zIDY2LjZDODcuOSA2Mi45IDkxLjEgNTcuNyA5MS4yIDQ4LjhDOTEuMyA0NS4zIDkwLjggNDAuOCA5MC4xIDM4LjhDODguNiAzNC4yIDgyLjQgMjguNSA3Ny4zIDI3QzcyLjcgMjUuNyAzMy44IDI0LjQgMzIuOCAyNS41TTEzOC4zIDgwLjNDMTM4LjYgMTA4LjcgMTM5LjEgMTI0IDEzOS45IDEyNy4xQzE0MS44IDEzNC41IDE0Ni45IDE0Mi4xIDE1Mi4zIDE0NS43QzE1OC4zIDE0OS43IDE2Mi4zIDE1MC45IDE3Mi41IDE1MS43QzE4Ni43IDE1Mi43IDE5Ny4xIDE0OS4xIDIwNS44IDE0MC4yTDIxMSAxMzQuNyAyMTEgMTQxLjlMMjExIDE0OSAyMjUgMTQ5TDIzOSAxNDkgMjM5IDkzLjVMMjM5IDM4IDIyNCAzOEwyMDkgMzggMjA5IDczLjNDMjA5IDExMy41IDIwOC42IDExNi43IDIwMi4xIDEyMy4xQzE5NC44IDEzMC41IDE4MC45IDEzMS4xIDE3My44IDEyNC4zQzE2OC41IDExOS4yIDE2OCAxMTUuMyAxNjggNzQuOEwxNjggMzggMTUyLjkgMzhMMTM3LjkgMzggMTM4LjMgODAuM00yNTUgOTNMMjU1IDE0OCAyNjkuNCAxNDhMMjgzLjggMTQ4IDI4NC4yIDExOC4zTDI4NC42IDg4LjUgMjg2LjggODIuOUMyODkuNSA3Ni4xIDI5NC44IDcwLjQgMzAwLjggNjcuN0MzMDQuMyA2Ni4yIDMwNy40IDY1LjggMzE0LjcgNjUuOEwzMjQgNjUuOSAzMjQgNTIuNUMzMjQgMzcuNSAzMjQuMiAzOCAzMTYuMiAzOEMzMDUuNSAzOC4xIDI5My4zIDQ1IDI4Ni45IDU0LjRMMjgzIDYwLjIgMjgzIDQ5LjFMMjgzIDM4IDI2OSAzOEwyNTUgMzggMjU1IDkzTTM3Mi4zIDM5LjVDMzQ1LjYgNDUuMyAzMjkuNCA2OS4yIDMzMS41IDk5LjVDMzMzLjcgMTMxLjEgMzU0LjkgMTUxLjEgMzg2LjQgMTUxQzQxNC4zIDE1MC45IDQzNC4xIDEzNi40IDQ0MC41IDExMS41QzQ0Mi40IDEwMy45IDQ0Mi40IDg2LjUgNDQwLjUgNzguMUM0MzcgNjMuNCA0MjYuNCA0OS45IDQxMy43IDQzLjlDNDAxLjYgMzguMyAzODUuNyAzNi42IDM3Mi4zIDM5LjVNMzgwLjEgNjFDMzczLjggNjIuNSAzNjguOCA2NyAzNjUgNzQuNUwzNjEuNSA4MS41IDM2MS41IDk0LjVDMzYxLjYgMTA1LjYgMzYxLjkgMTA4LjMgMzYzLjggMTEzLjJDMzY2LjYgMTIwLjEgMzczIDEyNi40IDM3OS4yIDEyOEMzODguMyAxMzAuNSAzOTkuOSAxMjcuNCA0MDUuMyAxMjEuMUM0MTAuMiAxMTUuMiA0MTIuMyAxMDcuNiA0MTIuNCA5NS41QzQxMi41IDgwLjMgNDEwLjYgNzQuMiA0MDMuNiA2Ny40QzM5Ni44IDYwLjggMzg5LjUgNTguOCAzODAuMSA2MSIvPjwvc3ZnPg==" alt="Puro"><span>Link</span></div></div>
-    <div class="sub">TELEMETRIA INDUSTRIAL</div>
-    <div class="app" data-app></div>
+    <div class="lockup" style="top:480px"><div class="words"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDIgMTUyIj48cGF0aCBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDc0TDAgMTQ4IDE2IDE0OEwzMiAxNDggMzIgMTIxLjVMMzIgOTUgNTYuOCA5NUM4NC40IDk1IDkwLjIgOTQuMSAxMDAuMyA4OC44QzExMS4zIDgyLjkgMTE4LjUgNzMuNSAxMjEuNSA2MC45QzEyNC4zIDQ4LjggMTIyLjggMzMuNSAxMTcuOSAyMy44QzExNC42IDE3LjQgMTA2LjcgOS42IDk5LjcgNi4xQzg4LjcgMC41IDgzLjggMCAzOS44IDBMMCAwIDAgNzRNMzIuOCAyNS41QzMyLjMgMjYgMzIgMzYuMiAzMiA0OC4zTDMyIDcwLjIgNTMuMyA2OS44TDc0LjYgNjkuNCA4MC4zIDY2LjZDODcuOSA2Mi45IDkxLjEgNTcuNyA5MS4yIDQ4LjhDOTEuMyA0NS4zIDkwLjggNDAuOCA5MC4xIDM4LjhDODguNiAzNC4yIDgyLjQgMjguNSA3Ny4zIDI3QzcyLjcgMjUuNyAzMy44IDI0LjQgMzIuOCAyNS41TTEzOC4zIDgwLjNDMTM4LjYgMTA4LjcgMTM5LjEgMTI0IDEzOS45IDEyNy4xQzE0MS44IDEzNC41IDE0Ni45IDE0Mi4xIDE1Mi4zIDE0NS43QzE1OC4zIDE0OS43IDE2Mi4zIDE1MC45IDE3Mi41IDE1MS43QzE4Ni43IDE1Mi43IDE5Ny4xIDE0OS4xIDIwNS44IDE0MC4yTDIxMSAxMzQuNyAyMTEgMTQxLjlMMjExIDE0OSAyMjUgMTQ5TDIzOSAxNDkgMjM5IDkzLjVMMjM5IDM4IDIyNCAzOEwyMDkgMzggMjA5IDczLjNDMjA5IDExMy41IDIwOC42IDExNi43IDIwMi4xIDEyMy4xQzE5NC44IDEzMC41IDE4MC45IDEzMS4xIDE3My44IDEyNC4zQzE2OC41IDExOS4yIDE2OCAxMTUuMyAxNjggNzQuOEwxNjggMzggMTUyLjkgMzhMMTM3LjkgMzggMTM4LjMgODAuM00yNTUgOTNMMjU1IDE0OCAyNjkuNCAxNDhMMjgzLjggMTQ4IDI4NC4yIDExOC4zTDI4NC42IDg4LjUgMjg2LjggODIuOUMyODkuNSA3Ni4xIDI5NC44IDcwLjQgMzAwLjggNjcuN0MzMDQuMyA2Ni4yIDMwNy40IDY1LjggMzE0LjcgNjUuOEwzMjQgNjUuOSAzMjQgNTIuNUMzMjQgMzcuNSAzMjQuMiAzOCAzMTYuMiAzOEMzMDUuNSAzOC4xIDI5My4zIDQ1IDI4Ni45IDU0LjRMMjgzIDYwLjIgMjgzIDQ5LjFMMjgzIDM4IDI2OSAzOEwyNTUgMzggMjU1IDkzTTM3Mi4zIDM5LjVDMzQ1LjYgNDUuMyAzMjkuNCA2OS4yIDMzMS41IDk5LjVDMzMzLjcgMTMxLjEgMzU0LjkgMTUxLjEgMzg2LjQgMTUxQzQxNC4zIDE1MC45IDQzNC4xIDEzNi40IDQ0MC41IDExMS41QzQ0Mi40IDEwMy45IDQ0Mi40IDg2LjUgNDQwLjUgNzguMUM0MzcgNjMuNCA0MjYuNCA0OS45IDQxMy43IDQzLjlDNDAxLjYgMzguMyAzODUuNyAzNi42IDM3Mi4zIDM5LjVNMzgwLjEgNjFDMzczLjggNjIuNSAzNjguOCA2NyAzNjUgNzQuNUwzNjEuNSA4MS41IDM2MS41IDk0LjVDMzYxLjYgMTA1LjYgMzYxLjkgMTA4LjMgMzYzLjggMTEzLjJDMzY2LjYgMTIwLjEgMzczIDEyNi40IDM3OS4yIDEyOEMzODguMyAxMzAuNSAzOTkuOSAxMjcuNCA0MDUuMyAxMjEuMUM0MTAuMiAxMTUuMiA0MTIuMyAxMDcuNiA0MTIuNCA5NS41QzQxMi41IDgwLjMgNDEwLjYgNzQuMiA0MDMuNiA2Ny40QzM5Ni44IDYwLjggMzg5LjUgNTguOCAzODAuMSA2MSIvPjwvc3ZnPg==" alt="Puro"><span>Link</span></div><div class="sub">TELEMETRIA INDUSTRIAL</div></div>
   </div></div></div>
-  <p>Uma linha de telemetria corre pela tela como num gráfico ao vivo. Depois a mesma caneta desenha o contorno do símbolo, que se preenche, e o nome surge do desfoque. A passagem é um fade suave.</p>
+  <p>Revelação por máscara. Os elos surgem do desfoque e o nome aparece. O ícone dá um leve recuo e vira uma janela recortada no verde, que cresce até tomar a tela e mostrar o app por dentro da marca.</p>
   <button class="btn" data-replay>Reiniciar</button>
 </section>
 
 <section class="opt">
-  <h2><span>5</span> · Cortina</h2>
-  <div class="frame"><div class="scaler"><div class="stage o5">
+  <h2><span>4</span> · Keynote</h2>
+  <div class="frame"><div class="scaler"><div class="stage s4" style="background:var(--bg)">
     <div class="app" data-app></div>
-    <div class="abs pnl pt"></div>
-    <div class="abs pnl pb"></div>
-    <div class="abs big"><svg viewBox="-96 0 591 591" width="120" height="120" aria-hidden="true">
-      <path class="top fb" fill="#fff" d="M110.5 0A92.5 92.5 0 0 1 203 92.5C203 168.5 239.5 196 306.5 196A92.5 92.5 0 1 1 214 288.5C214 213 177.5 185 110.5 185A92.5 92.5 0 0 1 110.5 0Z"/>
-      <path class="bot fb" fill="#fff" d="M92.5 210A92.5 92.5 0 0 1 185 302.5C185 378.5 221.5 406 288.5 406A92.5 92.5 0 1 1 196 498.5C196 423 159.5 395 92.5 395A92.5 92.5 0 0 1 92.5 210Z"/>
-    </svg></div>
-    <div class="abs lock"><div class="words"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDIgMTUyIj48cGF0aCBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDc0TDAgMTQ4IDE2IDE0OEwzMiAxNDggMzIgMTIxLjVMMzIgOTUgNTYuOCA5NUM4NC40IDk1IDkwLjIgOTQuMSAxMDAuMyA4OC44QzExMS4zIDgyLjkgMTE4LjUgNzMuNSAxMjEuNSA2MC45QzEyNC4zIDQ4LjggMTIyLjggMzMuNSAxMTcuOSAyMy44QzExNC42IDE3LjQgMTA2LjcgOS42IDk5LjcgNi4xQzg4LjcgMC41IDgzLjggMCAzOS44IDBMMCAwIDAgNzRNMzIuOCAyNS41QzMyLjMgMjYgMzIgMzYuMiAzMiA0OC4zTDMyIDcwLjIgNTMuMyA2OS44TDc0LjYgNjkuNCA4MC4zIDY2LjZDODcuOSA2Mi45IDkxLjEgNTcuNyA5MS4yIDQ4LjhDOTEuMyA0NS4zIDkwLjggNDAuOCA5MC4xIDM4LjhDODguNiAzNC4yIDgyLjQgMjguNSA3Ny4zIDI3QzcyLjcgMjUuNyAzMy44IDI0LjQgMzIuOCAyNS41TTEzOC4zIDgwLjNDMTM4LjYgMTA4LjcgMTM5LjEgMTI0IDEzOS45IDEyNy4xQzE0MS44IDEzNC41IDE0Ni45IDE0Mi4xIDE1Mi4zIDE0NS43QzE1OC4zIDE0OS43IDE2Mi4zIDE1MC45IDE3Mi41IDE1MS43QzE4Ni43IDE1Mi43IDE5Ny4xIDE0OS4xIDIwNS44IDE0MC4yTDIxMSAxMzQuNyAyMTEgMTQxLjlMMjExIDE0OSAyMjUgMTQ5TDIzOSAxNDkgMjM5IDkzLjVMMjM5IDM4IDIyNCAzOEwyMDkgMzggMjA5IDczLjNDMjA5IDExMy41IDIwOC42IDExNi43IDIwMi4xIDEyMy4xQzE5NC44IDEzMC41IDE4MC45IDEzMS4xIDE3My44IDEyNC4zQzE2OC41IDExOS4yIDE2OCAxMTUuMyAxNjggNzQuOEwxNjggMzggMTUyLjkgMzhMMTM3LjkgMzggMTM4LjMgODAuM00yNTUgOTNMMjU1IDE0OCAyNjkuNCAxNDhMMjgzLjggMTQ4IDI4NC4yIDExOC4zTDI4NC42IDg4LjUgMjg2LjggODIuOUMyODkuNSA3Ni4xIDI5NC44IDcwLjQgMzAwLjggNjcuN0MzMDQuMyA2Ni4yIDMwNy40IDY1LjggMzE0LjcgNjUuOEwzMjQgNjUuOSAzMjQgNTIuNUMzMjQgMzcuNSAzMjQuMiAzOCAzMTYuMiAzOEMzMDUuNSAzOC4xIDI5My4zIDQ1IDI4Ni45IDU0LjRMMjgzIDYwLjIgMjgzIDQ5LjFMMjgzIDM4IDI2OSAzOEwyNTUgMzggMjU1IDkzTTM3Mi4zIDM5LjVDMzQ1LjYgNDUuMyAzMjkuNCA2OS4yIDMzMS41IDk5LjVDMzMzLjcgMTMxLjEgMzU0LjkgMTUxLjEgMzg2LjQgMTUxQzQxNC4zIDE1MC45IDQzNC4xIDEzNi40IDQ0MC41IDExMS41QzQ0Mi40IDEwMy45IDQ0Mi40IDg2LjUgNDQwLjUgNzguMUM0MzcgNjMuNCA0MjYuNCA0OS45IDQxMy43IDQzLjlDNDAxLjYgMzguMyAzODUuNyAzNi42IDM3Mi4zIDM5LjVNMzgwLjEgNjFDMzczLjggNjIuNSAzNjguOCA2NyAzNjUgNzQuNUwzNjEuNSA4MS41IDM2MS41IDk0LjVDMzYxLjYgMTA1LjYgMzYxLjkgMTA4LjMgMzYzLjggMTEzLjJDMzY2LjYgMTIwLjEgMzczIDEyNi40IDM3OS4yIDEyOEMzODguMyAxMzAuNSAzOTkuOSAxMjcuNCA0MDUuMyAxMjEuMUM0MTAuMiAxMTUuMiA0MTIuMyAxMDcuNiA0MTIuNCA5NS41QzQxMi41IDgwLjMgNDEwLjYgNzQuMiA0MDMuNiA2Ny40QzM5Ni44IDYwLjggMzg5LjUgNTguOCAzODAuMSA2MSIvPjwvc3ZnPg==" alt="Puro"><span>Link</span></div></div>
+    <div class="abs card4 green" style="inset:-3px;transform-origin:198px 425px">
+      <div class="abs mark" style="left:120px;top:290px;width:150px;height:150px">
+        <svg viewBox="-96 0 591 591" width="150" height="150" aria-hidden="true"><path data-sym fill="#fff"/></svg>
+        <div class="shine" data-sym-mask><i></i></div>
+      </div>
+      <div class="lockup" style="top:470px"><div class="words"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDIgMTUyIj48cGF0aCBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDc0TDAgMTQ4IDE2IDE0OEwzMiAxNDggMzIgMTIxLjVMMzIgOTUgNTYuOCA5NUM4NC40IDk1IDkwLjIgOTQuMSAxMDAuMyA4OC44QzExMS4zIDgyLjkgMTE4LjUgNzMuNSAxMjEuNSA2MC45QzEyNC4zIDQ4LjggMTIyLjggMzMuNSAxMTcuOSAyMy44QzExNC42IDE3LjQgMTA2LjcgOS42IDk5LjcgNi4xQzg4LjcgMC41IDgzLjggMCAzOS44IDBMMCAwIDAgNzRNMzIuOCAyNS41QzMyLjMgMjYgMzIgMzYuMiAzMiA0OC4zTDMyIDcwLjIgNTMuMyA2OS44TDc0LjYgNjkuNCA4MC4zIDY2LjZDODcuOSA2Mi45IDkxLjEgNTcuNyA5MS4yIDQ4LjhDOTEuMyA0NS4zIDkwLjggNDAuOCA5MC4xIDM4LjhDODguNiAzNC4yIDgyLjQgMjguNSA3Ny4zIDI3QzcyLjcgMjUuNyAzMy44IDI0LjQgMzIuOCAyNS41TTEzOC4zIDgwLjNDMTM4LjYgMTA4LjcgMTM5LjEgMTI0IDEzOS45IDEyNy4xQzE0MS44IDEzNC41IDE0Ni45IDE0Mi4xIDE1Mi4zIDE0NS43QzE1OC4zIDE0OS43IDE2Mi4zIDE1MC45IDE3Mi41IDE1MS43QzE4Ni43IDE1Mi43IDE5Ny4xIDE0OS4xIDIwNS44IDE0MC4yTDIxMSAxMzQuNyAyMTEgMTQxLjlMMjExIDE0OSAyMjUgMTQ5TDIzOSAxNDkgMjM5IDkzLjVMMjM5IDM4IDIyNCAzOEwyMDkgMzggMjA5IDczLjNDMjA5IDExMy41IDIwOC42IDExNi43IDIwMi4xIDEyMy4xQzE5NC44IDEzMC41IDE4MC45IDEzMS4xIDE3My44IDEyNC4zQzE2OC41IDExOS4yIDE2OCAxMTUuMyAxNjggNzQuOEwxNjggMzggMTUyLjkgMzhMMTM3LjkgMzggMTM4LjMgODAuM00yNTUgOTNMMjU1IDE0OCAyNjkuNCAxNDhMMjgzLjggMTQ4IDI4NC4yIDExOC4zTDI4NC42IDg4LjUgMjg2LjggODIuOUMyODkuNSA3Ni4xIDI5NC44IDcwLjQgMzAwLjggNjcuN0MzMDQuMyA2Ni4yIDMwNy40IDY1LjggMzE0LjcgNjUuOEwzMjQgNjUuOSAzMjQgNTIuNUMzMjQgMzcuNSAzMjQuMiAzOCAzMTYuMiAzOEMzMDUuNSAzOC4xIDI5My4zIDQ1IDI4Ni45IDU0LjRMMjgzIDYwLjIgMjgzIDQ5LjFMMjgzIDM4IDI2OSAzOEwyNTUgMzggMjU1IDkzTTM3Mi4zIDM5LjVDMzQ1LjYgNDUuMyAzMjkuNCA2OS4yIDMzMS41IDk5LjVDMzMzLjcgMTMxLjEgMzU0LjkgMTUxLjEgMzg2LjQgMTUxQzQxNC4zIDE1MC45IDQzNC4xIDEzNi40IDQ0MC41IDExMS41QzQ0Mi40IDEwMy45IDQ0Mi40IDg2LjUgNDQwLjUgNzguMUM0MzcgNjMuNCA0MjYuNCA0OS45IDQxMy43IDQzLjlDNDAxLjYgMzguMyAzODUuNyAzNi42IDM3Mi4zIDM5LjVNMzgwLjEgNjFDMzczLjggNjIuNSAzNjguOCA2NyAzNjUgNzQuNUwzNjEuNSA4MS41IDM2MS41IDk0LjVDMzYxLjYgMTA1LjYgMzYxLjkgMTA4LjMgMzYzLjggMTEzLjJDMzY2LjYgMTIwLjEgMzczIDEyNi40IDM3OS4yIDEyOEMzODguMyAxMzAuNSAzOTkuOSAxMjcuNCA0MDUuMyAxMjEuMUM0MTAuMiAxMTUuMiA0MTIuMyAxMDcuNiA0MTIuNCA5NS41QzQxMi41IDgwLjMgNDEwLjYgNzQuMiA0MDMuNiA2Ny40QzM5Ni44IDYwLjggMzg5LjUgNTguOCAzODAuMSA2MSIvPjwvc3ZnPg==" alt="Puro"><span>Link</span></div><div class="sub">TELEMETRIA INDUSTRIAL</div></div>
+    </div>
   </div></div></div>
-  <p>A mais curta (cerca de 3 s) e a mais fiel à splash atual: começa idêntica a ela, o símbolo pulsa e o nome aparece. Depois os dois elos se separam como uma cortina, para cima e para baixo, e abrem a tela inicial.</p>
+  <p>Estilo apresentação da Apple. O ícone vem de muito perto, desfocado, e recua até o tamanho final. Um brilho passa, o nome se escreve e o texto ganha espaçamento. Na saída, a tela verde se fecha num ícone de app e o app aparece por trás.</p>
   <button class="btn" data-replay>Reiniciar</button>
 </section>
 
@@ -308,15 +157,153 @@ svg{overflow:visible}
 <script>
 const tpl = document.getElementById('agora');
 document.querySelectorAll('[data-app]').forEach(el => el.appendChild(tpl.content.cloneNode(true)));
-let rate = 1;
-const anims = root => root.getAnimations({ subtree: true });
-function restart(root) { anims(root).forEach(a => { a.currentTime = 0; a.playbackRate = rate; a.play(); }); }
-document.querySelectorAll('[data-replay]').forEach(b => b.addEventListener('click', () => restart(b.closest('.opt'))));
-document.getElementById('all').addEventListener('click', () => restart(document.body));
+
+// ---------- utilitários ----------
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, p) => a + (b - a) * p;
+const E = {
+  out: p => 1 - Math.pow(1 - p, 3),
+  in: p => p * p * p,
+  inOut: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+  expo: p => p >= 1 ? 1 : 1 - Math.pow(2, -10 * p),
+  expoIn: p => p <= 0 ? 0 : Math.pow(2, 10 * p - 10),
+  spring: p => p >= 1 ? 1 : 1 - Math.exp(-5.5 * p) * Math.cos(9 * p),
+};
+const P = (t, a, b, e = E.out) => e(clamp((t - a) / (b - a)));
+const n = v => +v.toFixed(2);
+
+// Geometria oficial do símbolo: cada elo = 2 círculos (r 92,5) ligados por curvas.
+// k = 0 colapsa as pontes; com o 2º centro sobre o 1º, o elo vira um círculo só.
+const R = 92.5, TOP = [110.5, 92.5, 306.5, 288.5], BOT = [92.5, 302.5, 288.5, 498.5];
+function link(x1, y1, x2, y2, r, k) {
+  return `M${n(x1)} ${n(y1 - r)}A${n(r)} ${n(r)} 0 0 1 ${n(x1 + r)} ${n(y1)}` +
+    `C${n(x1 + r)} ${n(y1 + 76 * k)} ${n(x2 - 67 * k)} ${n(y2 - r)} ${n(x2)} ${n(y2 - r)}` +
+    `A${n(r)} ${n(r)} 0 1 1 ${n(x2 - r)} ${n(y2)}` +
+    `C${n(x2 - r)} ${n(y2 - 75.5 * k)} ${n(x1 + 67 * k)} ${n(y1 + r)} ${n(x1)} ${n(y1 + r)}` +
+    `A${n(r)} ${n(r)} 0 0 1 ${n(x1)} ${n(y1 - r)}Z`;
+}
+const morph = (L, r, f) => link(L[0], L[1], lerp(L[0], L[2], f), lerp(L[1], L[3], f), Math.max(r, 0), f);
+const D_TOP = morph(TOP, R, 1), D_BOT = morph(BOT, R, 1), D_SYM = D_TOP + D_BOT;
+const maskUrl = d => `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 591 591"><path d="${d}"/></svg>`)}")`;
+
+document.querySelectorAll('path[data-top]').forEach(p => p.setAttribute('d', D_TOP));
+document.querySelectorAll('path[data-bot]').forEach(p => p.setAttribute('d', D_BOT));
+document.querySelectorAll('path[data-sym]').forEach(p => p.setAttribute('d', D_SYM));
+document.querySelectorAll('[data-sym-mask]').forEach(el => { el.style.webkitMaskImage = el.style.maskImage = maskUrl(D_SYM); });
+
+function wordsIn(lock, p) {
+  lock.style.opacity = p;
+  lock.style.filter = `blur(${n((1 - p) * 10)}px)`;
+  lock.style.transform = `translateY(${n((1 - p) * 12)}px)`;
+}
+
+// ---------- motor ----------
+const opts = [];
+function reg(section, dur, render) { opts.push({ section, dur, render, t: 0 }); }
+let rate = 1, last = performance.now();
+function frame(now) {
+  const dt = Math.min(now - last, 100) * rate; last = now;
+  for (const o of opts) { o.t = (o.t + dt) % o.dur; o.render(o.t); }
+  requestAnimationFrame(frame);
+}
+
+// ---------- 1 · Gota ----------
+(() => {
+  const s = document.querySelector('.s1'), q = x => s.querySelector(x);
+  const top = q('[data-top]'), bot = q('[data-bot]'), mark = q('.mark'), glow = q('.glow'), lock = q('.lockup'), app = q('.app');
+  reg(s.closest('.opt'), 5600, t => {
+    top.setAttribute('d', morph(TOP, R * P(t, 250, 900, E.spring), P(t, 800, 1600, E.inOut)));
+    bot.setAttribute('d', morph(BOT, R * P(t, 1100, 1750, E.spring), P(t, 1600, 2400, E.inOut)));
+    const z = P(t, 3500, 4250, E.expoIn);
+    mark.style.transform = `scale(${n(lerp(1, 60, z))})`;
+    glow.style.opacity = n(P(t, 1200, 2600) * (1 - P(t, 3300, 3700)));
+    wordsIn(lock, P(t, 2500, 3050) * (1 - P(t, 3300, 3550, E.inOut)));
+    const a = P(t, 4300, 4800);
+    app.style.opacity = a; app.style.transform = `translateY(${n((1 - a) * 18)}px)`;
+  });
+})();
+
+// ---------- 2 · Vidro ----------
+(() => {
+  const s = document.querySelector('.s2'), q = x => s.querySelector(x);
+  const blobs = [...s.querySelectorAll('.blob')], content = q('.content'), lock = q('.lockup'), app = q('.app'), shine = q('.shine i');
+  const links = [...s.querySelectorAll('.gl')].map((el, i) => {
+    el.querySelector('.glass').style.webkitMaskImage = el.querySelector('.glass').style.maskImage = maskUrl(i ? D_BOT : D_TOP);
+    return { el, solid: el.querySelector('.solid'), c: i ? { dx: -110, dy: 140, ry: -75, rz: 30 } : { dx: 110, dy: -140, ry: 75, rz: -30 } };
+  });
+  reg(s.closest('.opt'), 6000, t => {
+    const sec = t / 1000;
+    blobs.forEach((b, i) => { b.style.transform = `translate(${n(Math.sin(sec * .9 + i * 2) * 50)}px,${n(Math.cos(sec * .7 + i * 1.3) * 60)}px)`; });
+    links.forEach((l, i) => {
+      const st = 300 + i * 220, p = P(t, st, st + 1500, E.spring), c = l.c, m = 1 - p;
+      l.el.style.opacity = n(P(t, st, st + 450));
+      l.el.style.transform = `perspective(700px) translate(${n(c.dx * m)}px,${n(c.dy * m)}px) rotateY(${n(c.ry * m)}deg) rotateZ(${n(c.rz * m)}deg) scale(${n(lerp(.55, 1, p))})`;
+      l.solid.setAttribute('opacity', n(P(t, 2700, 3200, E.inOut)));
+    });
+    shine.style.transform = `translateX(${n(lerp(-150, 350, P(t, 2100, 2900, E.inOut)))}%) skewX(-20deg)`;
+    wordsIn(lock, P(t, 3000, 3550));
+    const x = P(t, 4000, 4800, E.inOut);
+    content.style.filter = `blur(${n(x * 24)}px)`; content.style.transform = `scale(${n(1 + x * .15)})`; content.style.opacity = n(1 - x);
+    const a = P(t, 4250, 4900);
+    app.style.opacity = n(a); app.style.filter = `blur(${n((1 - a) * 16)}px)`; app.style.transform = `scale(${n(1.05 - .05 * a)})`;
+  });
+})();
+
+// ---------- 3 · Janela ----------
+(() => {
+  const s = document.querySelector('.s3'), q = x => s.querySelector(x);
+  const hole = q('[data-hole]'), white = q('[data-white]'), parts = [q('[data-white] [data-top]'), q('[data-white] [data-bot]')], lock = q('.lockup'), app = q('.app');
+  // centro do ícone na tela e centro do 2º círculo do elo de cima (ponto de mergulho)
+  const C = [195, 375], O = [222.2, 373.2];
+  const tf = (a, z) => `translate(${O[0]} ${O[1]}) scale(${n(z)}) translate(${-O[0]} ${-O[1]}) translate(${C[0]} ${C[1]}) scale(${n(a)}) translate(${-C[0]} ${-C[1]})`;
+  reg(s.closest('.opt'), 5400, t => {
+    parts.forEach((p, i) => {
+      const st = 250 + i * 250, k = P(t, st, st + 1000);
+      p.style.opacity = n(k); p.style.transform = `scale(${n(lerp(1.5, 1, k))})`; p.style.filter = `blur(${n((1 - k) * 12)}px)`;
+    });
+    wordsIn(lock, P(t, 1500, 2050) * (1 - P(t, 2650, 2900, E.inOut)));
+    const a = lerp(1, .86, P(t, 2900, 3250, E.inOut));
+    const z = t < 3250 ? 1 : lerp(1, 34, P(t, 3250, 4200, E.expoIn));
+    white.setAttribute('transform', tf(a, z)); hole.setAttribute('transform', tf(a, z));
+    hole.setAttribute('visibility', t >= 3240 ? 'visible' : 'hidden');
+    white.setAttribute('opacity', t < 3250 ? 1 : n(1 - P(t, 3250, 3340)));
+    app.style.transform = `scale(${n(1.08 - .08 * P(t, 3300, 4400))})`;
+  });
+})();
+
+// ---------- 4 · Keynote ----------
+(() => {
+  const s = document.querySelector('.s4'), q = x => s.querySelector(x);
+  const card = q('.card4'), mark = q('.mark'), shine = q('.shine i'), lock = q('.lockup'), img = q('.words img'), span = q('.words span'), sub = q('.sub'), app = q('.app');
+  reg(s.closest('.opt'), 5800, t => {
+    const p = P(t, 150, 1700, E.expo);
+    mark.style.transform = `scale(${n(lerp(5, 1, p))})`; mark.style.filter = `blur(${n((1 - p) * 28)}px)`; mark.style.opacity = n(P(t, 150, 700));
+    shine.style.transform = `translateX(${n(lerp(-150, 350, P(t, 1700, 2400, E.inOut)))}%) skewX(-20deg)`;
+    const w = P(t, 1900, 2500, E.inOut);
+    img.style.clipPath = `inset(0 ${n((1 - w) * 100)}% 0 0)`; img.style.filter = `blur(${n((1 - w) * 6)}px)`;
+    span.style.opacity = n(P(t, 2250, 2700));
+    const u = P(t, 2450, 3100);
+    sub.style.opacity = n(u); sub.style.letterSpacing = `${n(lerp(8, 1.8, u))}px`;
+    lock.style.opacity = n(1 - P(t, 3500, 3750));
+    const x = P(t, 3800, 4600, E.inOut), y = P(t, 3800, 4250, E.inOut);
+    card.style.clipPath = `inset(${n(y * 227)}px 0 ${n(y * 227)}px 0 round ${n(x * 90)}px)`;
+    card.style.transform = `translateY(${n(x * 60)}px) scale(${n(lerp(1, .25, x))})`;
+    card.style.opacity = n(1 - P(t, 4350, 4650));
+    app.style.transform = `scale(${n(lerp(.94, 1, P(t, 3900, 4700)))})`;
+  });
+})();
+
+// ?t=2000 congela todas as opções nesse instante (ms), para revisar quadro a quadro
+const tFix = new URLSearchParams(location.search).get('t');
+if (tFix !== null) { rate = 0; opts.forEach(o => { o.t = Math.min(+tFix, o.dur - 1); }); }
+requestAnimationFrame(frame);
+document.querySelectorAll('[data-replay]').forEach(b => b.addEventListener('click', () => {
+  const o = opts.find(o => o.section === b.closest('.opt')); if (o) o.t = 0;
+}));
+document.getElementById('all').addEventListener('click', () => opts.forEach(o => { o.t = 0; }));
 document.getElementById('slow').addEventListener('click', e => {
   rate = rate === 1 ? 0.35 : 1;
   e.currentTarget.setAttribute('aria-pressed', rate !== 1);
-  anims(document.body).forEach(a => { a.playbackRate = rate; });
 });
 </script>
 </body>
